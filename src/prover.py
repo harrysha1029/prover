@@ -1,24 +1,30 @@
 """
 Goal: prove for all n, if n is even, n^2 is even
     Pick arbitrary integer n
-Goal: prove n is even implies n^2 is even. 
+Goal: prove n is even implies n^2 is even.
     Assume n is even
 Goal: prove n^2 is even
     Use definition of even number
 Goal: prove exists k where n^2 = 2k
     Let j be such that n = 2j, (because n is even we know j exists)
-    Have n^2 
+    Have n^2
         = (2j)^2
         = 4j^2
-        = 2(2j^2)mypy 
+        = 2(2j^2)mypy
     Pick k = 2j^2
 """
-from src.logic import *
-from src.proof import *
+from typing import List
+
+from src.logic import Exists, Forall, Formula, Implies
+from src.proof import assume_antecedent, pick_arbitrary, split_on_and
+
+
+def Equals(a, b):
+    return True
 
 
 def IsEven(n):
-    return Forall("k", Equals("n^2", "2k"))
+    return Exists("k", Equals("n^2", "2k"))
 
 
 # Squared("n"))
@@ -38,7 +44,7 @@ def try_step(goal: Formula, student_input) -> List[Formula]:
 
 
 def prover(theorem=SQUARED_EVEN) -> None:
-    context = {}  # n: int, arbitrary, even
+    # context = {}  # n: int, arbitrary, even
     # goals = [Formulae()]
     goals = [theorem]
     while goals:

@@ -1,10 +1,8 @@
-from typing import List
-
-
 class Formula:
     """ Goal == Formula """
 
     def __repr__(self) -> str:
+        del self
         raise NotImplementedError
 
 
@@ -42,6 +40,15 @@ class Forall(Formula):
 
     def __repr__(self) -> str:
         return f"(Forall {self.variable}. ({self.inner_formula}))"
+
+
+class Exists(Formula):
+    def __init__(self, variable, inner_formula) -> None:
+        self.variable = variable
+        self.inner_formula = inner_formula
+
+    def __repr__(self) -> str:
+        return f"(Exists {self.variable}. ({self.inner_formula}))"
 
 
 def substitute(old_variable: str, new_variable: str, formula: Formula):

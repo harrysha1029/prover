@@ -1,4 +1,6 @@
-from src.logic import *
+from typing import List
+
+from src.logic import And, Forall, Formula, Implies, substitute
 
 # ======= Proof Steps =====================
 # These all need to return a list of new goals
@@ -21,3 +23,7 @@ def assume_antecedent(goal: Implies, context):
 
 def pick_arbitrary(goal: Forall, variable: str, context):
     return [substitute(goal.variable, variable, goal.inner_formula)]
+
+
+# def show_exists(goal: Forall, variable: str, context):
+#     return [substitute(goal.variable, variable, goal.inner_formula)]
