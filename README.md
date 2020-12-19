@@ -2,6 +2,10 @@
 
 By Harry Sha and Tyler Yep
 
+## Development Setup
+- Run `pip install -r requirements-dev.txt`
+- Then `pre-commit install`
+
 # TODO
 
 - Write out a sample proof for:
