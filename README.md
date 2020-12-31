@@ -216,3 +216,84 @@ class Var:
 for_all(lambda n: even(n) == even(n-2))
 function == implication
 ```
+
+## December 30, 2020
+
+THEOREM: (A & (A -> B)) -> (B)
+
+1. Goal: (A & (A -> B)) -> (B)
+Assume (A & (A -> B))
+
+
+2. Goal: B
+Assumptions:
+    - 1.  (A & (A -> B))
+
+split_on_and(1)  # accepts 1 or   (A & (A -> B))
+
+3. Goal: B
+Assumptions:
+    - 1.  (A & (A -> B))
+    - 2.  A
+    - 3.  A -> B
+
+deduce(2, 3)
+qed
+
+THEOREM: (A & (A -> B)) -> (B)
+output:
+- Assume (A & (A -> B))
+- split_on_and(A & (A -> B))
+- deduce(A, A -> B)
+
+
+THEOREM: ((A-> C) & (B -> C)) -> (A | B) -> (C)
+- Assume ((A-> C) & (B -> C))
+- split_on_and((A -> C) & (B -> C))
+
+Goal: (A | B) -> C
+Assumptions:
+    1- (A -> C) & (B -> C)
+    2- (B -> C)
+    3- (A -> C)
+
+assume(A | B)
+
+Goal: C
+Assumptions:
+    1- (A -> C) & (B -> C)
+    2- (B -> C)
+    3- (A -> C)
+    4- A | B
+
+split_on_or
+Goal: C 
+    Assumptions(A):
+        1- (A -> C) & (B -> C)
+        2- (B -> C)
+        3- (A -> C)
+        4- A | B
+        5- A
+    deduce(A, A->C)
+
+    Assumptions(B):
+        1- (A -> C) & (B -> C)
+        2- (B ->s C)
+        3- (A -> C)
+        4- A | B
+        5- B
+    deduce(A, A->C)
+
+
+
+ProgramState = contains lists of proofs / proofstates. each time the user inputs, advances the programstate, so as to alow them to "undo". Also allows us to examine the path a student takes to solve the proof.
+
+ProofState = contains goals, assumptions
+FitchProof =
+FitchLine = (line_number:int, formula: [Formula], rule: FitchRule , lines_applied_to: [int], assumptions: list[FitchLine])
+StudentProof
+
+Theorem =
+Goal = 
+Assumption = 
+

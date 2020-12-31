@@ -13,6 +13,8 @@ Goal: prove exists k where n^2 = 2k
         = 2(2j^2)mypy
     Pick k = 2j^2
 """
+from __future__ import annotations
+
 from typing import List
 
 from src.logic import Exists, Forall, Formula, Implies
@@ -43,18 +45,46 @@ def try_step(goal: Formula, student_input) -> List[Formula]:
     return []
 
 
-def prover(theorem=SQUARED_EVEN) -> None:
-    # context = {}  # n: int, arbitrary, even
-    # goals = [Formulae()]
-    goals = [theorem]
-    while goals:
-        for goal in goals:
-            print(f"Goal: prove {goal}")
-        student_input = input(">> ")
-        # context += understand(parse(input()))
-        new_goals = []
-        for goal in goals:
-            new_goals += try_step(goal, student_input)
-        goals = new_goals
+class ProofState:
+    def __init__(self, goals, assumptions) -> None:
+        self.goals = []
+        self.assumptions = []
+        self.proofs
 
-    print("We did it!")
+    def update(self, new_goals, new_assumptions) -> ProofState:
+        return ProofState(
+            self.goals + new_goals,
+            self.assumptions + new_assumptions,
+        )
+
+    def done(self) -> bool:
+        return not self.goals
+
+
+class Proof:
+    def __init__(self, goal, assumptions):
+        self.goal = goal
+        self.assumptions = assumptions
+
+
+# def get_proof_of_theorem(And(A, B)):
+#     if thm is And:
+#         get_proof_of_theorem(A)
+#         get_proof_of_theorem(B)
+
+
+# def prover(theorem=SQUARED_EVEN) -> None:
+#     # context = {}  # n: int, arbitrary, even
+#     # goals = [Formulae()]
+#     proof_state = ProofState([theorem], [])
+#     while not proof_state.done():
+#         for goal in proof_state.goals:
+#             print(f"Goal: prove {goal}")
+#         student_input = input(">> ")
+#         # context += understand(parse(input()))
+#         for goal in goals:
+#             proof_state = ProofState()
+#             # new_goals += try_step(goal, student_input)
+#         goals = new_goals
+
+#     print("We did it!")

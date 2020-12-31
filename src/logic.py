@@ -5,6 +5,17 @@ class Formula:
         del self
         raise NotImplementedError
 
+    def __eq__(self, other) -> bool:
+        return str(self) == str(other)
+
+
+class Var(Formula):
+    def __init__(self, str):
+        self.str = str
+
+    def __repr__(self):
+        return self.str
+
 
 class Or(Formula):
     def __init__(self, left_formula, right_formula) -> None:
