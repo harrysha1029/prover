@@ -1,5 +1,5 @@
 class Formula:
-    """ Goal == Formula """
+    """Goal == Formula"""
 
     def __repr__(self) -> str:
         del self
